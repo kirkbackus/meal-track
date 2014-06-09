@@ -1,0 +1,171 @@
+# depslib dependency file v1.0
+1312571715 source:c:\users\kirk\desktop\food\main.cpp
+	<windows.h>
+	<time.h>
+	<process.h>
+	<math.h>
+	"GUI/gui.h"
+	"resource.h"
+	"scale.h"
+
+1311091648 source:c:\users\kirk\desktop\food\resource.rc
+	"resource.h"
+
+1311091617 c:\users\kirk\desktop\food\resource.h
+
+1310056939 source:c:\users\kirk\desktop\food\window.cpp
+	"window.h"
+
+1310056912 c:\users\kirk\desktop\food\window.h
+	<windows.h>
+	"menu.h"
+	"control.h"
+
+1310133180 source:c:\users\kirk\desktop\food\menu.cpp
+	"menu.h"
+
+1310133004 c:\users\kirk\desktop\food\menu.h
+	<windows.h>
+
+1310057335 source:c:\users\kirk\desktop\food\control.cpp
+	"control.h"
+
+1310058071 c:\users\kirk\desktop\food\control.h
+	<windows.h>
+
+1310131940 source:c:\users\kirk\desktop\food\button.cpp
+	"button.h"
+
+1310131469 c:\users\kirk\desktop\food\button.h
+	"control.h"
+
+1312573845 source:c:\users\kirk\desktop\food\scale.cpp
+	"scale.h"
+
+1312573766 c:\users\kirk\desktop\food\scale.h
+	<windows.h>
+	<iostream>
+
+1311863123 source:c:\users\kirk\desktop\food\gui\control.cpp
+	"gui.h"
+
+1311004815 c:\users\kirk\desktop\food\gui\gui.h
+	<windows.h>
+	"control.h"
+	"menu.h"
+	"window.h"
+	"button.h"
+	"label.h"
+	"listbox.h"
+	"editbox.h"
+	"combobox.h"
+
+1311008884 c:\users\kirk\desktop\food\gui\control.h
+
+1310134482 c:\users\kirk\desktop\food\gui\menu.h
+
+1310742289 c:\users\kirk\desktop\food\gui\window.h
+
+1310745154 c:\users\kirk\desktop\food\gui\button.h
+
+1310134543 source:c:\users\kirk\desktop\food\gui\menu.cpp
+	"gui.h"
+
+1311260769 source:c:\users\kirk\desktop\food\gui\window.cpp
+	"gui.h"
+
+1311007067 source:c:\users\kirk\desktop\food\gui\button.cpp
+	"gui.h"
+
+1310142748 c:\users\kirk\desktop\food\gui\label.h
+
+1310746312 c:\users\kirk\desktop\food\gui\listbox.h
+
+1310999939 source:c:\users\kirk\desktop\food\gui\listbox.cpp
+	"gui.h"
+
+1311003724 source:c:\users\kirk\desktop\food\gui\label.cpp
+	"gui.h"
+
+1311008690 source:c:\users\kirk\desktop\food\gui\editbox.cpp
+	"gui.h"
+
+1311008683 c:\users\kirk\desktop\food\gui\editbox.h
+
+1311006034 c:\users\kirk\desktop\food\gui\combobox.h
+
+1311006088 source:c:\users\kirk\desktop\food\gui\combobox.cpp
+	"gui.h"
+
+1311007067 source:c:\users\kirk\documents\programming\food\gui\button.cpp
+	"gui.h"
+
+1311004815 c:\users\kirk\documents\programming\food\gui\gui.h
+	<windows.h>
+	"control.h"
+	"menu.h"
+	"window.h"
+	"button.h"
+	"label.h"
+	"listbox.h"
+	"editbox.h"
+	"combobox.h"
+
+1311008884 c:\users\kirk\documents\programming\food\gui\control.h
+
+1310134482 c:\users\kirk\documents\programming\food\gui\menu.h
+
+1310742289 c:\users\kirk\documents\programming\food\gui\window.h
+
+1310745154 c:\users\kirk\documents\programming\food\gui\button.h
+
+1310142748 c:\users\kirk\documents\programming\food\gui\label.h
+
+1310746312 c:\users\kirk\documents\programming\food\gui\listbox.h
+
+1311008683 c:\users\kirk\documents\programming\food\gui\editbox.h
+
+1311006034 c:\users\kirk\documents\programming\food\gui\combobox.h
+
+1311006088 source:c:\users\kirk\documents\programming\food\gui\combobox.cpp
+	"gui.h"
+
+1311863123 source:c:\users\kirk\documents\programming\food\gui\control.cpp
+	"gui.h"
+
+1311008690 source:c:\users\kirk\documents\programming\food\gui\editbox.cpp
+	"gui.h"
+
+1311003724 source:c:\users\kirk\documents\programming\food\gui\label.cpp
+	"gui.h"
+
+1310999939 source:c:\users\kirk\documents\programming\food\gui\listbox.cpp
+	"gui.h"
+
+1310134543 source:c:\users\kirk\documents\programming\food\gui\menu.cpp
+	"gui.h"
+
+1311260769 source:c:\users\kirk\documents\programming\food\gui\window.cpp
+	"gui.h"
+
+1312573992 source:c:\users\kirk\documents\programming\food\main.cpp
+	<windows.h>
+	<time.h>
+	<process.h>
+	<math.h>
+	"GUI/gui.h"
+	"resource.h"
+	"scale.h"
+
+1311091617 c:\users\kirk\documents\programming\food\resource.h
+
+1312573766 c:\users\kirk\documents\programming\food\scale.h
+	<windows.h>
+	<iostream>
+
+1311091648 source:c:\users\kirk\documents\programming\food\resource.rc
+	"resource.h"
+
+1312573845 source:c:\users\kirk\documents\programming\food\scale.cpp
+	"scale.h"
+

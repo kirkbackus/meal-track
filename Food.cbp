@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="MealTrack" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin\Debug\MealTrack" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Debug\" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin\Release\MealTrack" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Release\" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Linker>
+			<Add library="gdi32" />
+			<Add library="user32" />
+			<Add library="kernel32" />
+			<Add library="Advapi32" />
+			<Add library="comdlg32" />
+		</Linker>
+		<Unit filename="GUI\button.cpp" />
+		<Unit filename="GUI\button.h" />
+		<Unit filename="GUI\combobox.cpp" />
+		<Unit filename="GUI\combobox.h" />
+		<Unit filename="GUI\control.cpp" />
+		<Unit filename="GUI\control.h" />
+		<Unit filename="GUI\editbox.cpp" />
+		<Unit filename="GUI\editbox.h" />
+		<Unit filename="GUI\gui.h" />
+		<Unit filename="GUI\label.cpp" />
+		<Unit filename="GUI\label.h" />
+		<Unit filename="GUI\listbox.cpp" />
+		<Unit filename="GUI\listbox.h" />
+		<Unit filename="GUI\menu.cpp" />
+		<Unit filename="GUI\menu.h" />
+		<Unit filename="GUI\window.cpp" />
+		<Unit filename="GUI\window.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="resource.h" />
+		<Unit filename="resource.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
+		<Unit filename="scale.cpp" />
+		<Unit filename="scale.h" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

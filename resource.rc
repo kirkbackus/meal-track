@@ -1,0 +1,17 @@
+#include "resource.h"
+
+IDR_MYMENU MENU
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New", ID_FILE_NEW
+        MENUITEM "&Save", ID_FILE_SAVE
+        MENUITEM "E&xit", ID_FILE_EXIT
+    END
+
+    POPUP "&Scale"
+    BEGIN
+        MENUITEM "&Connect", ID_SCALE_CONNECT
+        MENUITEM "&Zero", 0, GRAYED
+    END
+END
