@@ -169,3 +169,76 @@
 1312573845 source:c:\users\kirk\documents\programming\food\scale.cpp
 	"scale.h"
 
+1311003467 source:c:\users\kirk\documents\programming\meal-track\gui\button.cpp
+	"gui.h"
+
+1311001215 c:\users\kirk\documents\programming\meal-track\gui\gui.h
+	<windows.h>
+	"control.h"
+	"menu.h"
+	"window.h"
+	"button.h"
+	"label.h"
+	"listbox.h"
+	"editbox.h"
+	"combobox.h"
+
+1311005284 c:\users\kirk\documents\programming\meal-track\gui\control.h
+
+1310130882 c:\users\kirk\documents\programming\meal-track\gui\menu.h
+
+1310738689 c:\users\kirk\documents\programming\meal-track\gui\window.h
+
+1310741554 c:\users\kirk\documents\programming\meal-track\gui\button.h
+
+1310139148 c:\users\kirk\documents\programming\meal-track\gui\label.h
+
+1310742712 c:\users\kirk\documents\programming\meal-track\gui\listbox.h
+
+1311005083 c:\users\kirk\documents\programming\meal-track\gui\editbox.h
+
+1311002434 c:\users\kirk\documents\programming\meal-track\gui\combobox.h
+
+1311002488 source:c:\users\kirk\documents\programming\meal-track\gui\combobox.cpp
+	"gui.h"
+
+1311859523 source:c:\users\kirk\documents\programming\meal-track\gui\control.cpp
+	"gui.h"
+
+1311005090 source:c:\users\kirk\documents\programming\meal-track\gui\editbox.cpp
+	"gui.h"
+
+1311000124 source:c:\users\kirk\documents\programming\meal-track\gui\label.cpp
+	"gui.h"
+
+1310996339 source:c:\users\kirk\documents\programming\meal-track\gui\listbox.cpp
+	"gui.h"
+
+1310130943 source:c:\users\kirk\documents\programming\meal-track\gui\menu.cpp
+	"gui.h"
+
+1311257169 source:c:\users\kirk\documents\programming\meal-track\gui\window.cpp
+	"gui.h"
+
+1416691696 source:c:\users\kirk\documents\programming\meal-track\main.cpp
+	<windows.h>
+	<time.h>
+	<process.h>
+	<math.h>
+	<vector.h>
+	"GUI/gui.h"
+	"resource.h"
+	"scale.h"
+
+1311088017 c:\users\kirk\documents\programming\meal-track\resource.h
+
+1312570166 c:\users\kirk\documents\programming\meal-track\scale.h
+	<windows.h>
+	<iostream>
+
+1311088048 source:c:\users\kirk\documents\programming\meal-track\resource.rc
+	"resource.h"
+
+1312570245 source:c:\users\kirk\documents\programming\meal-track\scale.cpp
+	"scale.h"
+

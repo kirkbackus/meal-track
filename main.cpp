@@ -2,6 +2,7 @@
 #include <time.h>
 #include <process.h>
 #include <math.h>
+#include <vector.h>
 
 #include "GUI/gui.h"
 #include "resource.h"
@@ -48,11 +49,33 @@ ComboBox cComboRecord;
 Label cLabelSensitivity;
 ComboBox cComboSensitivity;
 
+class MealItem {
+    private:
+
+    struct tm* timestamp;
+    float value;
+    LPCSTR unit;
+
+    MealItem(struct tm* timestamp, float value, LPCSTR unit) : timestamp(timestamp), value(value), unit(unit) {}
+
+    public:
+
+    static MealItem create(float value, LPCSTR unit) {
+        time_t rwtm;
+        time(&rwtm);
+        MealItem item(new tm(*localtime(&rwtm)), value, unit);
+        return item;
+    }
+
+    struct tm* getTime() { return timestamp; }
+    float getValue() { return value; }
+    LPCSTR getUnit() { return unit; }
+
+    ~MealItem() {}
+};
+
 //Data to store the meal
-float mMass[1024];
-struct tm* mTime[1024];
-LPCSTR mUnit[1024];
-int mNumMeals = 0;
+std::vector<MealItem> vMealItems;
 int mCompare = 1;
 float mSensitivity = 0;
 
@@ -139,9 +162,7 @@ int WINAPI WinMain (HINSTANCE hThisInstance, HINSTANCE hPrevInstance, LPSTR lpsz
     MSG msg;
     while (cWindow.GetMessage(&msg))
     {
-        // Translate virtual-key messages into character messages
         TranslateMessage(&msg);
-        // Send message to WindowProcedure
         DispatchMessage(&msg);
     }
 
@@ -170,9 +191,10 @@ LRESULT CALLBACK WindowProcedure (HWND hWnd, UINT mMsg, WPARAM wParam, LPARAM lP
                 if (scale != NULL && scale->IsConnected()) {
                     //Check if we just finished a meal as well, if we didn't, start one
                     if (!bMealActive) { //If the meal is not active, start it or reset it
-                        if (mNumMeals == 0) {
+                        if (vMealItems.size() == 0) {
                             _beginthread(Meal, 0, (void*)hWnd);
                         } else {
+                            vMealItems.clear();
                             HandleMenu(hWnd, ID_FILE_NEW);
                         }
                     } else { //Otherwise, stop it
@@ -186,7 +208,7 @@ LRESULT CALLBACK WindowProcedure (HWND hWnd, UINT mMsg, WPARAM wParam, LPARAM lP
         case WM_CLOSE:
             if (strlen(cSaveName) > 1 && !SaveMeal()) {
                 if (CheckAndSave() == -1) break;
-            } else if (!bSaved && mNumMeals > 0) {
+            } else if (!bSaved && vMealItems.size() > 0) {
                 switch(MessageBox(hWnd, "You haven't saved the current meal, would you like to?","Hold Up!", MB_YESNOCANCEL | MB_ICONINFORMATION)) {
                     case IDYES:
                         if (CheckAndSave() == -1) break;
@@ -261,8 +283,8 @@ void CreateWindowMenu(Window w) {
     w.SetWindowMenu(mTitle);
 }
 
-void ToggleScaleMenu(bool a) {
-    if (a) { //If scale is active
+void ToggleScaleMenu(bool scaleIsActive) {
+    if (scaleIsActive) { //If scale is active
         mScale.EditItem(ID_SCALE_CONNECT, "&Disconnect");
         mScale.EditItem(ID_SCALE_ZERO, "&Zero", 0);
         cButton.SetEnabled(1);
@@ -282,13 +304,13 @@ void HandleMenu(HWND hWnd, DWORD opt) {
         break;
 
         case ID_FILE_NEW:
-            if (!bSaved && mNumMeals > 0) {
+            if (!bSaved && vMealItems.size() > 0) {
                 switch(MessageBox(hWnd, "You haven't saved the current meal, would you like to?","Hold Up!", MB_YESNOCANCEL | MB_ICONINFORMATION)) {
                     case IDYES:
                         if (CheckAndSave()==-1) break;
                     case IDNO:
                         cListBox.Clear();
-                        mNumMeals = 0;
+                        vMealItems.clear();
                         strcpy(cSaveName, "");
                         cWindow.SetTitle("MealTrack - Untitled");
                         cButton.SetText("Start Meal");
@@ -300,7 +322,7 @@ void HandleMenu(HWND hWnd, DWORD opt) {
                 }
             } else {
                 cListBox.Clear();
-                mNumMeals = 0;
+                vMealItems.clear();
                 strcpy(cSaveName, "");
                 cWindow.SetTitle("MealTrack - Untitled");
                 cButton.SetText("Start Meal");
@@ -309,7 +331,7 @@ void HandleMenu(HWND hWnd, DWORD opt) {
 
         case ID_FILE_SAVE:
             GetSaveFile(hWnd);
-            if (mNumMeals >= 1) CheckAndSave();
+            if (vMealItems.size() >= 1) CheckAndSave();
 
             char tmp[313];
             sprintf(tmp, "MealTrack - %s", strrchr(cSaveName,'\\') + 1);
@@ -394,7 +416,7 @@ void Meal(void* args) {
     AddCurrentValue();
 
     //Activate the meal
-    bMealActive = 1;
+    bMealActive = true;
 
     while(bMealActive) {
         //So if the scale is not stable, set the current time to when the scale was last stable
@@ -435,18 +457,17 @@ void AddCurrentValue() {
 
     //Get the current values from the scale and computer
     fLastWeight = scale->GetWeight();
-    mMass[mNumMeals] = fLastWeight;
-    mTime[mNumMeals] = new tm(*localtime(&rwtm));
-    mUnit[mNumMeals] = scale->GetUnit();
+
+    MealItem item = MealItem::create(fLastWeight, scale->GetUnit());
+    vMealItems.push_back(item);
 
     //Convert time to string (12/24 hour format)
-    if (cComboDate.GetSelectedItem()==0) strftime(tmp2, 128, "%I:%M:%S %p", mTime[mNumMeals]);
-    else strftime(tmp2, 128, "%H:%M:%S", mTime[mNumMeals]);
+    if (cComboDate.GetSelectedItem()==0) strftime(tmp2, 128, "%I:%M:%S %p", item.getTime());
+    else strftime(tmp2, 128, "%H:%M:%S", item.getTime());
 
     //Print to the textbox
-    sprintf(tmp, "%s: %.2f %s", tmp2, mMass[mNumMeals], mUnit[mNumMeals]);
+    sprintf(tmp, "%s: %.2f %s", tmp2, item.getValue(), item.getUnit());
 
-    mNumMeals++;
     cListBox.AddItem(tmp);
 }
 
@@ -471,7 +492,7 @@ void GetSaveFile(HWND hWnd) {
 
 bool SaveMeal() {
     if (cSaveName==NULL || strlen(cSaveName)<=1) return 0;
-    if (mNumMeals<=0) return 0;
+    if (vMealItems.size() <=0) return 0;
 
     if (strstr(cSaveName,".csv") == NULL) strcat(cSaveName,".csv");
 
@@ -480,7 +501,7 @@ bool SaveMeal() {
     if (fSave == NULL) return 0;
 
     char tmp[313];
-    strftime(tmp, 128, "%m/%d/%Y", mTime[0]);
+    strftime(tmp, 128, "%m/%d/%Y", vMealItems[0].getTime());
 
     if (fprintf(fSave, "MEAL START: %s,,\n", tmp) == 0) {
         fclose(fSave);
@@ -489,13 +510,14 @@ bool SaveMeal() {
 
     fprintf(fSave, "Time,Mass,Unit\n");
 
-    for (int i=0; i<mNumMeals; i++) {
-        if (cComboDate.GetSelectedItem()==0) strftime(tmp, 128, "%I:%M:%S %p", mTime[i]);
-        else strftime(tmp, 128, "%H:%M:%S", mTime[i]);
-        fprintf(fSave, "%s,%.2f,%s\n", tmp, mMass[i], mUnit[i]);
+    std::vector<MealItem>::iterator mealIterator = vMealItems.begin();
+    while(mealIterator != vMealItems.end()) {
+        if (cComboDate.GetSelectedItem()==0) strftime(tmp, 128, "%I:%M:%S %p", mealIterator->getTime());
+        else strftime(tmp, 128, "%H:%M:%S", mealIterator->getTime());
+        fprintf(fSave, "%s,%.2f,%s\n", tmp, mealIterator->getValue(), mealIterator->getUnit());
     }
 
-    strftime(tmp, 128, "%m/%d/%Y", mTime[mNumMeals-1]);
+    strftime(tmp, 128, "%m/%d/%Y", vMealItems[vMealItems.size()-1].getTime());
     fprintf(fSave, "MEAL END: %s,,\n", tmp);
 
     fclose(fSave);
